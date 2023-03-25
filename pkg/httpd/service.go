@@ -26,7 +26,7 @@ type Store interface {
 	Delete(key string) error
 
 	// Join joins the node, identified by nodeID and reachable at addr, to the cluster.
-	Join(nodeID string, httpAddr string, addr string) error
+	Join(nodeID, httpAddr, addr string) error
 
 	LeaderAPIAddr() string
 
@@ -136,7 +136,7 @@ func (s *Service) handleJoin(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 			redirect := s.FormRedirect(r, leader)
-			//http.Redirect(w, r, redirect, http.StatusMovedPermanently)
+			// http.Redirect(w, r, redirect, http.StatusMovedPermanently)
 			http.Redirect(w, r, redirect, http.StatusTemporaryRedirect)
 			return
 		}
@@ -194,7 +194,7 @@ func (s *Service) handleKeyRequest(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 				redirect := s.FormRedirect(r, leader)
-				//http.Redirect(w, r, redirect, http.StatusMovedPermanently)
+				// http.Redirect(w, r, redirect, http.StatusMovedPermanently)
 				http.Redirect(w, r, redirect, http.StatusTemporaryRedirect)
 				return
 			}
@@ -227,7 +227,7 @@ func (s *Service) handleKeyRequest(w http.ResponseWriter, r *http.Request) {
 					}
 
 					redirect := s.FormRedirect(r, leader)
-					//http.Redirect(w, r, redirect, http.StatusMovedPermanently)
+					// http.Redirect(w, r, redirect, http.StatusMovedPermanently)
 					http.Redirect(w, r, redirect, http.StatusTemporaryRedirect)
 					return
 				}
@@ -252,7 +252,7 @@ func (s *Service) handleKeyRequest(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 				redirect := s.FormRedirect(r, leader)
-				//http.Redirect(w, r, redirect, http.StatusMovedPermanently)
+				// http.Redirect(w, r, redirect, http.StatusMovedPermanently)
 				http.Redirect(w, r, redirect, http.StatusTemporaryRedirect)
 				return
 			}

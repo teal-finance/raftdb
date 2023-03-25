@@ -23,9 +23,12 @@ const (
 
 // Command line parameters
 var httpAddr string
-var raftAddr string
-var joinAddr string
-var nodeID string
+
+var (
+	raftAddr string
+	joinAddr string
+	nodeID   string
+)
 
 func init() {
 	flag.StringVar(&httpAddr, "haddr", DefaultHTTPAddr, "Set the HTTP bind address")
@@ -52,7 +55,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "No Raft storage directory specified\n")
 		os.Exit(1)
 	}
-	os.MkdirAll(raftDir, 0700)
+	os.MkdirAll(raftDir, 0o700)
 
 	s := store.New()
 	s.RaftDir = raftDir

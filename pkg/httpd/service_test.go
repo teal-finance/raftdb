@@ -7,9 +7,10 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"raftdb/pkg/store"
 	"strings"
 	"testing"
+
+	"raftdb/pkg/store"
 )
 
 // Test_NewServer tests that a server can perform all basic operations.
@@ -44,7 +45,6 @@ func Test_NewServer(t *testing.T) {
 	if string(b) != `{"k2":""}` {
 		t.Fatalf(`wrong value received for key k2: %s (expected empty string)`, string(b))
 	}
-
 }
 
 type testServer struct {

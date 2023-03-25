@@ -231,7 +231,7 @@ func (s *Store) WaitForApplied(timeout time.Duration) error {
 func (s *Store) consistentRead() error {
 	future := s.raft.VerifyLeader()
 	if err := future.Error(); err != nil {
-		return err //fail fast if leader verification fails
+		return err // fail fast if leader verification fails
 	}
 
 	return nil
@@ -243,7 +243,6 @@ func (s *Store) Get(key string, lvl ConsistencyLevel) (string, error) {
 		if s.raft.State() != raft.Leader {
 			return "", ErrNotLeader
 		}
-
 	}
 
 	if lvl == Consistent {
@@ -310,7 +309,7 @@ func (s *Store) DeleteMeta(key string) error {
 
 // Join joins a node, identified by nodeID and located at addr, to this store.
 // The node must be ready to respond to Raft communications at that address.
-func (s *Store) Join(nodeID, httpAddr string, addr string) error {
+func (s *Store) Join(nodeID, httpAddr, addr string) error {
 	s.logger.Printf("received join request for remote node %s at %s", nodeID, addr)
 
 	configFuture := s.raft.GetConfiguration()
@@ -430,7 +429,6 @@ func (f *fsmSnapshot) Persist(sink raft.SnapshotSink) error {
 		// Close the sink.
 		return sink.Close()
 	}()
-
 	if err != nil {
 		sink.Cancel()
 	}
